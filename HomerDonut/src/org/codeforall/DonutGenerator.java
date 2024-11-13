@@ -4,10 +4,13 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class DonutGenerator {
 
-    private int posY = -10;
+    private int startPosY = -10;
+    private int donutYPos = -10;
+    private int donutXPos;
+    private int delay = 10;
     private Picture donutImg;
     private DonutType generatedDonut;
-    private Donut donut;
+    Game game;
 
     public DonutType randomDonut(){
 
@@ -24,20 +27,33 @@ public class DonutGenerator {
         }
     }
 
-
-    public Donut drawDonut(){
+    public Picture drawDonut(){
         DonutType generatedDonut = randomDonut();
-        Donut donut = new Donut(generatedDonut);
         this.generatedDonut = generatedDonut;
 
-        int randomDonutPos = (840 + (int)Math.floor(Math.random()*800));
-        this.posY = posY;
+        donutXPos = (438 + (int)Math.floor(Math.random()*800));
 
-        Picture donutImg = new Picture(randomDonutPos, posY, generatedDonut.getResource());
+        donutImg = new Picture(donutXPos, startPosY, generatedDonut.getResource());
         donutImg.draw();
-        this.donutImg = donutImg;
 
-        return donut;
+        return donutImg;
+    }
+
+    public void translate() {
+
+
+        while (donutYPos < 750) {
+            try {
+                Thread.sleep(delay);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            donutImg.translate(0, generatedDonut.getSpeed());
+            donutYPos = donutYPos + generatedDonut.getSpeed();
+            System.out.println(donutYPos);
+
+            }
+        donutYPos = -10;
     }
 
     public Picture getDonutImg() {

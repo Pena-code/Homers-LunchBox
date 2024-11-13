@@ -1,5 +1,6 @@
 package org.codeforall;
 
+import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Game {
@@ -7,34 +8,33 @@ public class Game {
     DonutGenerator donutGen = new DonutGenerator();
     DonutType donutType;
 
-    private int delay = 10;
     private int gameLevel = 100000;
-    private int maxObjects = 6;
     private boolean gameOver = false;
-    private Picture[] donutSet = new Picture[maxObjects];
+    private MyKeyboardHandler keyboard = new MyKeyboardHandler();
+    private DonutBox box;
 
 
     public void init(){
-
+        keyboard.KeyboardHandler(box, this);
         new Background();
     }
 
     public void start() {
+        box = new DonutBox();
 
-        while (!gameOver) {
 
-            for (int i = 0; i < maxObjects; i++) {
-                Donut drawnDonut = donutGen.drawDonut();
+        while(!gameOver){
+                donutGen.drawDonut();
+                donutGen.translate();
 
-                for (int j = gameLevel; j <= 0; j--) {
-                    try {
-                        Thread.sleep(delay);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-                    drawnDonut.getResource().translate(0, drawnDonut.getSpeed());
-                }
-            }
         }
+    }
+
+    public int getGameLevel() {
+        return gameLevel;
+    }
+
+    public DonutBox getBox() {
+        return box;
     }
 }

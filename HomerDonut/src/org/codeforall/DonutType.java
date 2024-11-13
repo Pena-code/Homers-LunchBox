@@ -19,9 +19,9 @@ public enum DonutType {
     public int getSpeed() {
         return speed;
     }
-    public int getPoints(DonutType donut) {
+    public int getPoints() {
 
-        return donut.points;
+        return points;
     }
     public String getResource() {
         return resource;
