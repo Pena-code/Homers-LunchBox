@@ -2,8 +2,8 @@ package org.codeforall;
 
 public enum DonutType {
     CHOCOLATE(5, 25, "src/resources/chocolate.png"),
-    PINK (2, 10, "src/resources/pink.png"),
-    CARAMEL(3, 5, "src/resources/caramel.png"),
+    PINK (2, 5, "src/resources/pink.png"),
+    CARAMEL(3, 10, "src/resources/caramel.png"),
     BROCCOLI(5, -25, "src/resources/broccoli.jpeg");
 
     private int speed;

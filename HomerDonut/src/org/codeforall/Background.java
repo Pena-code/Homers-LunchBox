@@ -21,6 +21,5 @@ public class Background {
         Rectangle rectangle1 = new Rectangle(433, 5, 851, 719);
         rectangle1.setColor(Color.BLACK);
         rectangle1.draw();
-
     }
 }

@@ -4,13 +4,14 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class DonutGenerator {
 
-    private int startPosY = -10;
-    private int donutYPos = -10;
+    private int startYPos = -10;
+    private int [] donutYPos = new int[4];
     private int donutXPos;
-    private int delay = 10;
-    private Picture donutImg;
-    private DonutType generatedDonut;
-    Game game;
+    int generationPointer;
+    int donutCounter = 0;
+    private boolean gameOver = false;
+    private DonutType[] generatedDonut = new DonutType[4];
+    private Picture[] donuts = new Picture[4];
 
     public DonutType randomDonut(){
 
@@ -27,40 +28,102 @@ public class DonutGenerator {
         }
     }
 
-    public Picture drawDonut(){
-        DonutType generatedDonut = randomDonut();
-        this.generatedDonut = generatedDonut;
+    public void drawDonut(int donutNum) {
 
-        donutXPos = (438 + (int)Math.floor(Math.random()*800));
+        generatedDonut[donutNum] = randomDonut();
 
-        donutImg = new Picture(donutXPos, startPosY, generatedDonut.getResource());
-        donutImg.draw();
+        donutXPos = (438 + (int) Math.floor(Math.random() * 800));
 
-        return donutImg;
+        donuts[donutNum] = new Picture(donutXPos, startYPos, generatedDonut[donutNum].getResource());
+        donuts[donutNum].draw();
+        donutYPos[donutNum] = -10;
     }
 
-    public void translate() {
+        public void translate (int donutNum) {
 
+                donuts[donutNum].translate(0, generatedDonut[donutNum].getSpeed());
+                donutYPos[donutNum] += generatedDonut[donutNum].getSpeed();
+        }
 
-        while (donutYPos < 750) {
-            try {
-                Thread.sleep(delay);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+    public void donutStartup(){
+        drawDonut(0);
+
+        while (!gameOver) {
+            generationPointer = getDonutYPos(0);
+            delay();
+            translate(0);
+            if (generationPointer >= getRandomYPos()) {
+                drawDonut(1);
+                while (!gameOver){
+                    generationPointer = getDonutYPos(1);
+                    delay();
+                    translate(0);
+                    translate(1);
+                    if(generationPointer >= getRandomYPos()){
+                        drawDonut(2);
+                        while (!gameOver){
+                            generationPointer = getDonutYPos(2);
+                            delay();
+                            translate(0);
+                            translate(1);
+                            translate(2);
+                            if(generationPointer >= getRandomYPos()){
+                                drawDonut(3);
+                                while (!gameOver){
+                                    generationPointer = getDonutYPos(3);
+                                    delay();
+                                    translate(0);
+                                    translate(1);
+                                    translate(2);
+                                    translate(3);
+                                    if(generationPointer >= getRandomYPos()){
+                                        donutRunner();
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                }
+
             }
-            donutImg.translate(0, generatedDonut.getSpeed());
-            donutYPos = donutYPos + generatedDonut.getSpeed();
-            System.out.println(donutYPos);
-
+        }
+    }
+    public void donutRunner(){
+        drawDonut(donutCounter);
+        while (!gameOver){
+            generationPointer = getDonutYPos(donutCounter);
+            delay();
+            translate(0);
+            translate(1);
+            translate(2);
+            translate(3);
+            if(generationPointer >= getRandomYPos()){
+                if(donutCounter == 3){
+                    donutCounter = 0;
+                    donutRunner();
+                }
+                else{
+                    donutCounter ++;
+                    donutRunner();
+                }
             }
-        donutYPos = -10;
+        }
+
+
+    }
+    public void delay(){
+        try {
+            Thread.sleep(10);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public Picture getDonutImg() {
-        return donutImg;
+    public int getDonutYPos(int donutNum) {
+        return donutYPos[donutNum];
     }
-
-    public DonutType getGeneratedDonut() {
-        return generatedDonut;
+    public int getRandomYPos(){
+        return 400+ (int) Math.floor(Math.random() * 500);
     }
 }

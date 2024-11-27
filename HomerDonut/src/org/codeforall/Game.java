@@ -1,16 +1,12 @@
 package org.codeforall;
 
-import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
-import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Game {
 
-    DonutGenerator donutGen = new DonutGenerator();
-    DonutType donutType;
 
     private int gameLevel = 100000;
-    private boolean gameOver = false;
     private MyKeyboardHandler keyboard = new MyKeyboardHandler();
+    private DonutGenerator donutGen = new DonutGenerator();
     private DonutBox box;
 
 
@@ -21,14 +17,10 @@ public class Game {
 
     public void start() {
         box = new DonutBox();
+        donutGen.donutStartup();
 
-
-        while(!gameOver){
-                donutGen.drawDonut();
-                donutGen.translate();
 
         }
-    }
 
     public int getGameLevel() {
         return gameLevel;
