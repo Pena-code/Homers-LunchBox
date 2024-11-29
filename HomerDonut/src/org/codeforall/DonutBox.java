@@ -7,7 +7,7 @@ public class DonutBox {
     private int boxYPos = 690;
     private int boxXPos = 800;
 
-    public DonutBox(){
+    public void donutBox(){
         boxPic = new Picture(boxXPos, boxYPos, "src/resources/donutbox.png");
         boxPic.draw();
     }

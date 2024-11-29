@@ -6,12 +6,13 @@ public class DonutGenerator {
 
     private int startYPos = -10;
     private int [] donutYPos = new int[4];
-    private int donutXPos;
+    private int []donutXPos = new int[4];
     int generationPointer;
     int donutCounter = 0;
     private boolean gameOver = false;
     private DonutType[] generatedDonut = new DonutType[4];
     private Picture[] donuts = new Picture[4];
+    private CollisionDetector detector;
 
     public DonutType randomDonut(){
 
@@ -32,9 +33,9 @@ public class DonutGenerator {
 
         generatedDonut[donutNum] = randomDonut();
 
-        donutXPos = (438 + (int) Math.floor(Math.random() * 800));
+        donutXPos[donutNum] = (438 + (int) Math.floor(Math.random() * 800));
 
-        donuts[donutNum] = new Picture(donutXPos, startYPos, generatedDonut[donutNum].getResource());
+        donuts[donutNum] = new Picture(donutXPos[donutNum], startYPos, generatedDonut[donutNum].getResource());
         donuts[donutNum].draw();
         donutYPos[donutNum] = -10;
     }
@@ -52,6 +53,7 @@ public class DonutGenerator {
             generationPointer = getDonutYPos(0);
             delay();
             translate(0);
+            detector.collisionCheck(0);
             if (generationPointer >= getRandomYPos()) {
                 drawDonut(1);
                 while (!gameOver){
@@ -59,6 +61,7 @@ public class DonutGenerator {
                     delay();
                     translate(0);
                     translate(1);
+                    detector.collisionCheck(1);
                     if(generationPointer >= getRandomYPos()){
                         drawDonut(2);
                         while (!gameOver){
@@ -67,6 +70,7 @@ public class DonutGenerator {
                             translate(0);
                             translate(1);
                             translate(2);
+                            detector.collisionCheck(2);
                             if(generationPointer >= getRandomYPos()){
                                 drawDonut(3);
                                 while (!gameOver){
@@ -76,6 +80,7 @@ public class DonutGenerator {
                                     translate(1);
                                     translate(2);
                                     translate(3);
+                                    detector.collisionCheck(3);
                                     if(generationPointer >= getRandomYPos()){
                                         donutRunner();
                                     }
@@ -98,6 +103,7 @@ public class DonutGenerator {
             translate(1);
             translate(2);
             translate(3);
+            detector.collisionCheck(3);
             if(generationPointer >= getRandomYPos()){
                 if(donutCounter == 3){
                     donutCounter = 0;
@@ -123,7 +129,28 @@ public class DonutGenerator {
     public int getDonutYPos(int donutNum) {
         return donutYPos[donutNum];
     }
+
+    public void resetDonutYPos(int donutNum) {
+        donutYPos[donutNum] = -500;
+    }
+
+    public int getDonutXPos(int donutNum) {
+        return donutXPos[donutNum];
+    }
+
     public int getRandomYPos(){
-        return 400+ (int) Math.floor(Math.random() * 500);
+        return 300+ (int) Math.floor(Math.random() * 300);
+    }
+
+    public void setDetector(CollisionDetector detector) {
+        this.detector = detector;
+    }
+
+    public DonutType getGeneratedDonutType(int num) {
+        return generatedDonut[num];
+    }
+
+    public Picture getDonutPic(int num) {
+        return donuts[num];
     }
 }

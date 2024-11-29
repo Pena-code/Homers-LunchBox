@@ -5,9 +5,10 @@ public class Game {
 
 
     private int gameLevel = 100000;
-    private MyKeyboardHandler keyboard = new MyKeyboardHandler();
-    private DonutGenerator donutGen = new DonutGenerator();
+    private MyKeyboardHandler keyboard;
+    private DonutGenerator donutGen;
     private DonutBox box;
+    private Score score;
 
 
     public void init(){
@@ -16,17 +17,29 @@ public class Game {
     }
 
     public void start() {
-        box = new DonutBox();
+        box.donutBox();
+        score.scoreDraw();
         donutGen.donutStartup();
-
 
         }
 
-    public int getGameLevel() {
-        return gameLevel;
-    }
-
     public DonutBox getBox() {
         return box;
+    }
+
+    public void setDonutGen(DonutGenerator donutGen) {
+        this.donutGen = donutGen;
+    }
+
+    public void setBox(DonutBox box) {
+        this.box = box;
+    }
+
+    public void setKeyboard(MyKeyboardHandler keyboard) {
+        this.keyboard = keyboard;
+    }
+
+    public void setScore(Score score) {
+        this.score = score;
     }
 }

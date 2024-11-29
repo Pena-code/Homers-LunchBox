@@ -48,6 +48,10 @@ public class MyKeyboardHandler implements KeyboardHandler {
         keyboard.addEventListener(space);
     }
 
+    public void setBox(DonutBox box) {
+        this.box = box;
+    }
+
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_LEFT) {
@@ -68,4 +72,5 @@ public class MyKeyboardHandler implements KeyboardHandler {
     public void keyReleased(KeyboardEvent keyboardEvent) {
 
     }
+
 }
