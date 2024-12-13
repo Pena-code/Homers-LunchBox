@@ -1,10 +1,10 @@
 package org.codeforall;
 
 public enum DonutType {
-    CHOCOLATE(5, 25, "src/resources/chocolate.png"),
-    PINK (2, 5, "src/resources/pink.png"),
-    CARAMEL(3, 10, "src/resources/caramel.png"),
-    BROCCOLI(5, -25, "src/resources/broccoli.jpeg");
+    CHOCOLATE(3, 5, Game.PREFIX + "chocolate.png"),
+    PINK (6, 20, Game.PREFIX + "pink.png"),
+    CARAMEL(4, 10, Game.PREFIX + "caramel.png"),
+    BROCCOLI(6, -20, Game.PREFIX + "broccoli.jpeg");
 
     private int speed;
     private int points;

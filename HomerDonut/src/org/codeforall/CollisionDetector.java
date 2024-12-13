@@ -2,15 +2,16 @@ package org.codeforall;
 
 public class CollisionDetector {
 
-    private int boxWith = 110;
-    private int boxHeight = 30;
+    private int boxWith = 100;
+    private int boxHeight = 20;
     private int donutWith = 30;
-    private int donutHeight = 45;
-    private int boxYPos = 690;
+    private int donutHeight = 30;
+    private int boxYPos = 680;
 
     private DonutGenerator donutGen;
     private DonutBox donutBox;
     private Score score;
+    private ScreenController screenController;
 
     public void collisionCheck(int numberOfDonuts){
         for(int i = 0; i <= numberOfDonuts; i++){
@@ -18,10 +19,17 @@ public class CollisionDetector {
             donutGen.getDonutXPos(i)+ donutWith > donutBox.getBoxXPos() &&
             donutGen.getDonutYPos(i) < boxYPos + boxHeight &&
             donutGen.getDonutYPos(i) + donutHeight > boxYPos){
-                System.out.println("Collision detected. Donut name: " + donutGen.getGeneratedDonutType(i).name() + " You get " + donutGen.getGeneratedDonutType(i).getPoints() + " points");
                 donutGen.getDonutPic(i).delete();
                 donutGen.resetDonutYPos(i);
                 score.scoreUpdate(donutGen.getGeneratedDonutType(i).getPoints());
+            }
+            if(donutGen.getDonutYPos(i) >= 720){
+                donutGen.getDonutPic(i).delete();
+                donutGen.resetDonutYPos(i);
+                if(donutGen.getGeneratedDonutType(i) == DonutType.PINK){
+                    screenController.deleteLive();
+                    System.out.println("PINK DONUT OUT!!!");
+                }
             }
 
         }
@@ -37,5 +45,9 @@ public class CollisionDetector {
 
     public void setScore(Score score) {
         this.score = score;
+    }
+
+    public void setScreenController(ScreenController screenController) {
+        this.screenController = screenController;
     }
 }

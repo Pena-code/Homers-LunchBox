@@ -3,12 +3,11 @@ package org.codeforall;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class DonutBox {
-    private Picture boxPic;
-    private int boxYPos = 690;
+    private int boxYPos = 680;
     private int boxXPos = 800;
+    private Picture boxPic = new Picture(boxXPos, boxYPos, Game.PREFIX + "donutbox.png");
 
-    public void donutBox(){
-        boxPic = new Picture(boxXPos, boxYPos, "src/resources/donutbox.png");
+    public void drawDonutBox(){
         boxPic.draw();
     }
 
@@ -27,12 +26,12 @@ public class DonutBox {
         boxXPos += 20;
         }
     }
+    public void deleteBox(){
+        boxPic.delete();
+    }
 
     public int getBoxXPos() {
         return boxXPos;
     }
 
-    public int getBoxYPos() {
-        return boxYPos;
-    }
 }

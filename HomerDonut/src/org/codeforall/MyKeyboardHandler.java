@@ -4,28 +4,24 @@ import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
-import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class MyKeyboardHandler implements KeyboardHandler {
 
     private Keyboard keyboard;
-    private DonutBox box;
     private Game game;
+    private int starter = 0;
 
-    public void KeyboardHandler(DonutBox box, Game game) {
-
-        this.box = box;
-        this.game = game;
-
+    public MyKeyboardHandler(Game game){
         keyboard = new Keyboard(this);
         setKeyboardEvents();
+        this.game = game;
     }
 
-    private void setKeyboardEvents() {
-        KeyboardEvent down = new KeyboardEvent();
-        down.setKey(KeyboardEvent.KEY_DOWN);
-        down.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-        keyboard.addEventListener(down);
+    public void setKeyboardEvents() {
+        KeyboardEvent quit = new KeyboardEvent();
+        quit.setKey(KeyboardEvent.KEY_Q);
+        quit.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        keyboard.addEventListener(quit);
 
         KeyboardEvent up = new KeyboardEvent();
         up.setKey(KeyboardEvent.KEY_UP);
@@ -48,10 +44,6 @@ public class MyKeyboardHandler implements KeyboardHandler {
         keyboard.addEventListener(space);
     }
 
-    public void setBox(DonutBox box) {
-        this.box = box;
-    }
-
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_LEFT) {
@@ -62,15 +54,23 @@ public class MyKeyboardHandler implements KeyboardHandler {
             game.getBox().moveBoxRight();
         }
 
-        /*if (keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE) {
-
-            }
-        }*/
+        if (keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE) {
+            game.setGameStage(1);
+        }
+        if (keyboardEvent.getKey() == KeyboardEvent.KEY_Q) {
+            game.setGameStage(2);
+        }
     }
 
     @Override
     public void keyReleased(KeyboardEvent keyboardEvent) {
-
     }
 
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    public int getStarter() {
+        return starter;
+    }
 }

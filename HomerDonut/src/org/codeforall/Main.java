@@ -3,25 +3,37 @@ package org.codeforall;
 public class Main {
     public static void main(String[] args) {
 
-    Game game = new Game();
-    DonutGenerator donutGen = new DonutGenerator();
-    CollisionDetector collisionDetector = new CollisionDetector();
-    DonutBox donutBox = new DonutBox();
-    MyKeyboardHandler keyboard = new MyKeyboardHandler();
-    Score score = new Score();
+        Game game = new Game();
+        Background background = new Background();
+        DonutGenerator donutGen = new DonutGenerator();
+        CollisionDetector collisionDetector = new CollisionDetector();
+        DonutBox donutBox = new DonutBox();
+        MyKeyboardHandler keyboard = new MyKeyboardHandler(game);
+        Score score = new Score();
+        Menu menu = new Menu();
+        ScreenController screenController = new ScreenController();
 
-    donutGen.setDetector(collisionDetector);
-    game.setDonutGen(donutGen);
-    collisionDetector.setDonGen(donutGen);
-    collisionDetector.setDonutBox(donutBox);
-    game.setBox(donutBox);
-    keyboard.setBox(donutBox);
-    game.setKeyboard(keyboard);
-    game.setScore(score);
-    collisionDetector.setScore(score);
+        game.setDonutGen(donutGen);
+        game.setBox(donutBox);
+        game.setKeyboard(keyboard);
+        game.setScore(score);
+        game.setScreenController(screenController);
 
-    game.init();
-    game.start();
+        collisionDetector.setDonGen(donutGen);
+        collisionDetector.setDonutBox(donutBox);
+        collisionDetector.setScore(score);
+        collisionDetector.setScreenController(screenController);
+
+        screenController.setDonutGen(donutGen);
+        screenController.setMenu(menu);
+        screenController.setBackground(background);
+        screenController.setGame(game);
+
+        donutGen.setDetector(collisionDetector);
+        keyboard.setGame(game);
+
+        game.init();
 
     }
+
 }
