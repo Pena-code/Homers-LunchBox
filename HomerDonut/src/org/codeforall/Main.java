@@ -12,12 +12,13 @@ public class Main {
         Score score = new Score();
         Menu menu = new Menu();
         ScreenController screenController = new ScreenController();
+        FileManager fileManager = new FileManager();
 
         game.setDonutGen(donutGen);
         game.setBox(donutBox);
-        game.setKeyboard(keyboard);
         game.setScore(score);
         game.setScreenController(screenController);
+        game.setFileManager(fileManager);
 
         collisionDetector.setDonGen(donutGen);
         collisionDetector.setDonutBox(donutBox);
@@ -31,6 +32,7 @@ public class Main {
 
         donutGen.setDetector(collisionDetector);
         keyboard.setGame(game);
+        score.setFileManager(fileManager);
 
         game.init();
 

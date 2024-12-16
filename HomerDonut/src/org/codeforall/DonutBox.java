@@ -13,7 +13,6 @@ public class DonutBox {
 
     public void moveBoxLeft(){
         if(boxXPos > 440){
-
         boxPic.translate(-20, 0);
         boxXPos -= 20;
         }
@@ -21,7 +20,6 @@ public class DonutBox {
     }
     public void moveBoxRight(){
         if (boxXPos < 1160) {
-
         boxPic.translate(20, 0);
         boxXPos += 20;
         }

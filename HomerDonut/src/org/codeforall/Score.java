@@ -5,6 +5,7 @@ import org.academiadecodigo.simplegraphics.graphics.Text;
 
 public class Score {
 
+    private FileManager fileManager;
     private int growIndex = 0;
     private int score = 0;
     private int highScore = 0;
@@ -12,10 +13,10 @@ public class Score {
     private String highScoreStr = Integer.toString(highScore);
 
 
-    Text scoreView = new Text(80, 110, scoreStr);
-    Text highScoreView = new Text(100, 245, highScoreStr);
-    Text scoreText = new Text(100, 60, "SCORE");
-    Text highScoreText = new Text(100, 190, "HIGHSCORE");
+    Text scoreView = new Text(110, 110, scoreStr);
+    Text highScoreView = new Text(120, 245, highScoreStr);
+    Text scoreText = new Text(130, 60, "SCORE");
+    Text highScoreText = new Text(120, 190, "HIGHSCORE");
 
     public void scoreUpdate(int value){
         score += value;
@@ -68,5 +69,9 @@ public class Score {
         this.highScore = highScore;
         String hsToStr = Integer.toString(highScore);
         highScoreView.setText(hsToStr);
+    }
+
+    public void setFileManager(FileManager fileManager) {
+        this.fileManager = fileManager;
     }
 }

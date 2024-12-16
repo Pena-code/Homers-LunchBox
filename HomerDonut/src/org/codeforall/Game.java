@@ -1,12 +1,11 @@
 package org.codeforall;
 
 public class Game {
-
-    private MyKeyboardHandler keyboard;
     private DonutGenerator donutGen;
     private DonutBox box;
     private Score score;
     private ScreenController screenController;
+    private FileManager fileManager;
     public static final String PREFIX = "src/resources/";
     private int lives = 2;
 
@@ -36,6 +35,7 @@ public class Game {
         screenController.showBackground();
         screenController.drawLives();
         box.drawDonutBox();
+        score.setHighScore(fileManager.loadHighScore());
         score.scoreDraw();
         donutGen.donutStartup();
         }
@@ -44,6 +44,8 @@ public class Game {
         screenController.drawGameOver();
         if(score.getScore() > score.getHighScore()){
             score.setHighScore(score.getScore());
+            String scr = Integer.toString(score.getScore());
+            fileManager.saveHighScore(scr);
         }
         while (true){
             System.out.println();
@@ -80,10 +82,6 @@ public class Game {
         this.box = box;
     }
 
-    public void setKeyboard(MyKeyboardHandler keyboard) {
-        this.keyboard = keyboard;
-    }
-
     public void setScore(Score score) {
         this.score = score;
     }
@@ -102,5 +100,9 @@ public class Game {
 
     public void setLives(int lives) {
         this.lives = lives;
+    }
+
+    public void setFileManager(FileManager fileManager) {
+        this.fileManager = fileManager;
     }
 }

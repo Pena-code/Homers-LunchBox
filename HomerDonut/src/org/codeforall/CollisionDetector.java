@@ -28,7 +28,6 @@ public class CollisionDetector {
                 donutGen.resetDonutYPos(i);
                 if(donutGen.getGeneratedDonutType(i) == DonutType.PINK){
                     screenController.deleteLive();
-                    System.out.println("PINK DONUT OUT!!!");
                 }
             }
 
