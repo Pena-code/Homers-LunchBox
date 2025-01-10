@@ -1,4 +1,4 @@
-Game made in java using SimpleGraphics(CodeforAll_) library.
+Game made in Java using SimpleGraphics(CodeforAll_) library.
 
 It's lunch time in Springfield, and as usual, Homer is very hungry. 
 Your task is to fill his LunchBox with his favorite food – Donuts! 
